@@ -5,7 +5,7 @@ export const appState = {
 }
 
 const AppReducer = (state = appState, action) => {
-  const {type, data} = action
+  const { type, data } = action
   switch (type) {
     case actionTypes.DEFAULT:
       return {

@@ -5,9 +5,10 @@ import { Provider } from 'react-redux'
 import store from './store'
 import Router from './router'
 
-export const App = () =>
+export const App = () => (
   <Provider store={store}>
     <Router />
   </Provider>
+)
 
 export default hot(module)(App)
