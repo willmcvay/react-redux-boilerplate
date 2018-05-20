@@ -1,26 +1,48 @@
-const post = async ({ url, body, success, failure, dispatch }) => {
+// @flow
+import { redirect } from 'redux-first-router'
+import type { AsyncParams } from '../core/types'
+
+const dispatchAction = (method, shouldRedirect, data) =>
+  shouldRedirect ? redirect({ type: method, data }) : { type: method, data }
+
+const post = async ({
+  url,
+  body,
+  success,
+  failure,
+  dispatch,
+  shouldRedirect
+}: AsyncParams) => {
   try {
     const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      method: 'post',
       body: JSON.stringify(body)
     })
     const data = await res.json()
-    dispatch({ type: success, data })
+    if (data.errors) {
+      dispatch(dispatchAction(failure, shouldRedirect, data))
+    } else {
+      dispatch(dispatchAction(success, shouldRedirect, data))
+    }
   } catch (e) {
-    dispatch({ type: failure })
+    dispatch(dispatchAction(failure, shouldRedirect, e))
   }
 }
 
-const get = async ({ url, success, failure, dispatch }) => {
+const get = async ({
+  url,
+  success,
+  failure,
+  dispatch,
+  shouldRedirect
+}: AsyncParams) => {
   try {
     const res = await fetch(url)
     const data = await res.json()
-    dispatch({ type: success, data })
+    dispatch(dispatchAction(success, shouldRedirect, data))
   } catch (e) {
-    dispatch({ type: failure })
+    console.log(e)
+    dispatch(dispatchAction(failure, shouldRedirect, {}))
   }
 }
 

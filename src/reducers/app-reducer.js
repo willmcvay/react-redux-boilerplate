@@ -1,5 +1,9 @@
 import * as actionTypes from '../constants/action-types'
 
+export type DefaultState = {
+  data: any
+}
+
 export const appState = {
   data: null
 }

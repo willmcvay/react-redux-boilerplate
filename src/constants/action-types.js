@@ -1,1 +1,3 @@
 export const DEFAULT = 'DEFAULT'
+export const DEFAULT_SUCCESS = 'DEFAULT_SUCCESS'
+export const DEFAULT_FAILURE = 'DEFAULT_FAILURE'

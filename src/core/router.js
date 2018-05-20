@@ -21,11 +21,11 @@ const Components = {
   AppPage
 }
 
-class Router extends React.Component<RouterProps, {}> {
-  render () {
-    const Page = Components[this.props.page]
-    return <Page />
-  }
+const Router: React.StatelessFunctionalComponent<RouterProps> = (
+  props: RouterProps
+) => {
+  const Page = Components[props.page]
+  return <Page />
 }
 
 const mapStateToProps = (state): RouterProps => ({
